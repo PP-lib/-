@@ -4,433 +4,671 @@ title: マスターROIストーリーノート（新工場投資ポートフォ�
 site: YKK AP Indonesia（建材製造）
 created: 2026-06-29
 updated: 2026-06-29
-status: Draft v0.1（骨子テンプレート）
+status: Draft v0.2（1ビジュアル/1スライド再構成）
 fx_base: USD/JPY = 150（感度 140 / 150 / 160）
 tags: [新工場, ROI, 投資ポートフォリオ, マスターノート, ロードマップ]
-related: ["[[新工場投資ポートフォリオ_トータルROI設計]]", "[[トータルROI台帳]]", "[[Logikal導入ROI]]", "[[Logikal導入_答申スライド構成案]]", "[[新工場_自動化投資とコストダウン計画まとめ]]"]
+changelog:
+  - v0.1 2026-06-29 骨子テンプレ（A〜H＋付録）
+  - v0.2 2026-06-29 「1スライド=1図/グラフ」に全面再構成。仮説配分を確定総額(123M/310K)に整合補正。全グラフをインラインSVG化。
 ---
-このファイルは中間成果物（HTML）です。印刷／PDF化でA4横スライドになります（Ctrl+P → 横 → 余白なし → 背景印刷ON）。
-1スライド = 1セクション（A〜H）。数値は TBD を後から埋める前提。
+中間成果物（HTML）。印刷／PDF化でA4横スライド（Ctrl+P → 横 → 余白なし → 背景印刷ON）。
+1スライド = 1ビジュアル（図 or グラフ）。数値はTBDを後から埋める前提。🟡=仮説／❌=未確定。
 -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>マスターROIストーリーノート｜YKK AP Indonesia 新工場</title>
+<title>マスターROIストーリーノート｜YKK AP Indonesia 新工場（1図/1スライド版）</title>
 <style>
   :root{
     --ink:#1a2330; --sub:#5b6b7f; --line:#c9d3df; --head:#0f3d5e;
-    --accent:#0a7d8c; --warn:#b4541a; --good:#1d7a46; --bg:#f4f7fa; --tbd:#b00020;
-    --base:#e8eef4; --foundation:#0a7d8c; --equip:#3a6ea5; --build:#8a6d3b; --ops:#1d7a46;
+    --accent:#0a7d8c; --equip:#3a6ea5; --ops:#1d7a46; --build:#8a6d3b;
+    --warn:#b4541a; --red:#c0392b; --amber:#e0a106; --bg:#f4f7fa; --tbd:#b00020;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;background:var(--bg);
     font-family:"Segoe UI","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;color:var(--ink);}
   .slide{
-    position:relative;width:297mm;height:210mm;margin:8mm auto;padding:14mm 16mm 12mm;
+    position:relative;width:297mm;height:210mm;margin:8mm auto;padding:13mm 16mm 14mm;
     background:#fff;box-shadow:0 2px 14px rgba(0,0,0,.12);overflow:hidden;
     page-break-after:always;break-after:page;display:flex;flex-direction:column;
   }
   .tag{position:absolute;top:0;left:0;height:100%;width:8mm;background:var(--head);}
-  .kicker{font-size:11pt;letter-spacing:.18em;color:var(--accent);font-weight:700;text-transform:uppercase;}
-  h1{font-size:30pt;margin:2mm 0 1mm;color:var(--head);line-height:1.15;}
-  h2{font-size:21pt;margin:1mm 0 3mm;color:var(--head);border-bottom:2px solid var(--line);padding-bottom:2mm;}
-  h3{font-size:13pt;margin:3mm 0 1mm;color:var(--accent);}
-  p,li,td,th{font-size:11pt;line-height:1.5;}
-  .sub{color:var(--sub);font-size:11pt;}
-  .meta{font-size:9.5pt;color:var(--sub);position:absolute;bottom:6mm;left:16mm;right:16mm;
+  .kicker{font-size:10.5pt;letter-spacing:.18em;color:var(--accent);font-weight:700;text-transform:uppercase;}
+  h1{font-size:32pt;margin:3mm 0 2mm;color:var(--head);line-height:1.15;}
+  h2{font-size:20pt;margin:0 0 1mm;color:var(--head);}
+  .figwrap{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin:2mm 0;}
+  .figwrap svg{width:100%;height:100%;max-height:148mm;}
+  .take{font-size:12pt;color:var(--ink);background:#eef4f8;border-left:5px solid var(--accent);
+    padding:2.5mm 4mm;border-radius:1.5mm;}
+  .take b{color:var(--head);}
+  .meta{font-size:9pt;color:var(--sub);position:absolute;bottom:6mm;left:16mm;right:16mm;
     display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:2mm;}
-  table{border-collapse:collapse;width:100%;margin:2mm 0;font-size:10pt;}
-  th,td{border:1px solid var(--line);padding:2.4mm 2.8mm;text-align:left;vertical-align:top;}
-  thead th{background:var(--head);color:#fff;font-weight:700;}
-  tbody tr:nth-child(even){background:#f6f9fc;}
-  .num{text-align:right;font-variant-numeric:tabular-nums;}
-  .tbd{color:var(--tbd);font-weight:700;}
-  .pill{display:inline-block;padding:.4mm 2.2mm;border-radius:3mm;font-size:8.5pt;font-weight:700;color:#fff;}
-  .p-base{background:var(--foundation);}.p-equip{background:var(--equip);}
-  .p-build{background:var(--build);}.p-ops{background:var(--ops);}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:8mm;}
-  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6mm;}
-  .card{border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:2mm;
-    padding:3mm 4mm;background:#fbfdff;}
-  .card h3{margin-top:0;}
-  .big{font-size:22pt;font-weight:800;color:var(--head);line-height:1.1;}
-  .flow{display:flex;align-items:center;gap:3mm;flex-wrap:wrap;font-size:10pt;}
-  .node{border:1.5px solid var(--accent);border-radius:2mm;padding:2mm 3mm;background:#eef8f9;font-weight:700;}
-  .node.core{background:var(--head);color:#fff;border-color:var(--head);}
-  .arrow{color:var(--sub);font-weight:700;}
-  ul{margin:1mm 0 1mm 5mm;padding:0;}
-  li{margin:.6mm 0;}
-  .legend{font-size:8.5pt;color:var(--sub);margin-top:1mm;}
-  .toc{font-size:8pt;color:var(--sub);position:absolute;top:6mm;right:16mm;}
+  .pageno{position:absolute;top:7mm;right:16mm;font-size:9pt;color:var(--sub);}
+  /* SVG共通テキスト */
+  svg text{font-family:"Segoe UI","Noto Sans JP",Meiryo,sans-serif;fill:var(--ink);}
+  .ax{stroke:var(--line);stroke-width:1.5;}
+  .axlabel{font-size:20px;fill:var(--sub);}
+  .barlabel{font-size:22px;fill:#fff;font-weight:700;}
+  .barval{font-size:22px;font-weight:700;}
+  .gridln{stroke:#e6edf3;stroke-width:1;}
+  .lead{font-size:13pt;color:var(--sub);}
+  ul.appendix{font-size:11pt;line-height:1.7;margin-left:5mm;}
   @media print{
     html,body{background:#fff;}
-    .slide{margin:0;box-shadow:none;width:297mm;height:210mm;}
+    .slide{margin:0;box-shadow:none;}
     @page{size:A4 landscape;margin:0;}
   }
 </style>
 </head>
 <body>
 
-<!-- ============ 表紙 ============ -->
+<!-- ===== 1. 表紙 ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <span class="toc">A 骨子 ｜ B 一覧 ｜ C 依存 ｜ D ROI ｜ E 優先 ｜ F 運用 ｜ G リスク ｜ H 答申</span>
-  <div class="kicker">Master ROI Story Note</div>
+  <div class="kicker">Master ROI Story Note — 1図/1スライド版</div>
   <h1>新工場投資ポートフォリオ<br>マスターROIストーリーノート</h1>
-  <p class="sub">YKK AP Indonesia（建材製造）／ 2026–2028 ／ すべての発注を一本のストーリーで束ねるハブノート</p>
-  <div class="grid3" style="margin-top:8mm;">
-    <div class="card"><h3>トータル投資</h3><div class="big">約 123<span style="font-size:12pt;">百万円</span></div><p class="sub">≒ 820K USD @150</p></div>
-    <div class="card"><h3>年間トータルCD</h3><div class="big">約 310K<span style="font-size:12pt;"> USD</span></div><p class="sub">≒ 46.5百万円/年 @150</p></div>
-    <div class="card"><h3>統合回収（目安）</h3><div class="big">約 2.9<span style="font-size:12pt;">年</span></div><p class="sub">純CD 290K USD/年ベース</p></div>
+  <p class="lead">YKK AP Indonesia（建材製造）／ 2026–2028 ／ 全発注を束ねるハブ・生きた台帳</p>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 470" preserveAspectRatio="xMidYMid meet">
+      <!-- 3つの柱→ROI のコンセプト図 -->
+      <g>
+        <rect x="60"  y="170" width="230" height="230" rx="10" fill="#eef4f8" stroke="#0a7d8c" stroke-width="2"/>
+        <text x="175" y="150" text-anchor="middle" font-size="24" font-weight="700" fill="#0f3d5e">トータル投資</text>
+        <text x="175" y="300" text-anchor="middle" font-size="52" font-weight="800" fill="#0f3d5e">123<tspan font-size="24">百万円</tspan></text>
+        <text x="175" y="345" text-anchor="middle" font-size="20" fill="#5b6b7f">≒ 820K USD @150</text>
+      </g>
+      <g>
+        <rect x="385" y="170" width="230" height="230" rx="10" fill="#eef7f1" stroke="#1d7a46" stroke-width="2"/>
+        <text x="500" y="150" text-anchor="middle" font-size="24" font-weight="700" fill="#0f3d5e">年間トータルCD</text>
+        <text x="500" y="300" text-anchor="middle" font-size="52" font-weight="800" fill="#0f3d5e">310K<tspan font-size="24"> USD</tspan></text>
+        <text x="500" y="345" text-anchor="middle" font-size="20" fill="#5b6b7f">≒ 46.5百万円/年</text>
+      </g>
+      <g>
+        <rect x="710" y="170" width="230" height="230" rx="10" fill="#fdf1e9" stroke="#b4541a" stroke-width="2"/>
+        <text x="825" y="150" text-anchor="middle" font-size="24" font-weight="700" fill="#0f3d5e">統合回収（目安）</text>
+        <text x="825" y="300" text-anchor="middle" font-size="52" font-weight="800" fill="#0f3d5e">約2.9<tspan font-size="24">年</tspan></text>
+        <text x="825" y="345" text-anchor="middle" font-size="20" fill="#5b6b7f">為替頑健 ±0.2年</text>
+      </g>
+    </svg>
   </div>
-  <p style="margin-top:8mm;font-size:10pt;">
-    <b>設計思想</b>：①本ノート単体で完結させない（詳細は子ノートに委譲）／②表を更新するだけでROI再計算／
-    ③発注稟議の根拠に切り出せる粒度／④<b>建屋判断と独立</b>に成立。
-  </p>
-  <p class="sub" style="margin-top:3mm;">関連子ノート：[[新工場投資ポートフォリオ_トータルROI設計]]・[[トータルROI台帳]]・[[Logikal導入ROI]]・[[Logikal導入_答申スライド構成案]]・[[新工場_自動化投資とコストダウン計画まとめ]]</p>
-  <div class="meta"><span>status: Draft v0.1 ｜ created 2026-06-29 ｜ updated 2026-06-29</span><span>FX前提: USD/JPY = 150（感度 140/150/160）</span></div>
+  <div class="take">設計思想：<b>①束ねるハブ ②表更新でROI再計算 ③稟議に切り出せる粒度 ④建屋判断と独立</b></div>
+  <div class="meta"><span>status: Draft v0.2 ｜ 2026-06-29</span><span>FX: USD/JPY = 150（感度 140/150/160）</span></div>
+  <div class="pageno">1</div>
 </div>
 
-<!-- ============ A. ストーリー骨子 ============ -->
+<!-- ===== 2. 結論：回収カーブ ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section A</div>
-  <h2>A. ストーリー骨子（1ページサマリ）</h2>
-  <div class="grid3">
-    <div class="card" style="border-left-color:var(--warn);">
-      <h3>WHY — なぜ新工場か</h3>
-      <ul>
-        <li>市場拡大・建材需要への能力増強 <span class="tbd">（TBD: 需要予測）</span></li>
-        <li>少量多品種化への対応（段取り増・LT悪化）</li>
-        <li>属人化からの脱却（設計〜加工のデータ標準化）</li>
-        <li>品質・コスト競争力の維持 <span class="tbd">（TBD: 競合比）</span></li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>WHAT — 実現する目標値</h3>
-      <table>
-        <tr><th>指標</th><th>現状</th><th>目標</th></tr>
-        <tr><td>生産能力</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-        <tr><td>LT（TBライン）</td><td>3日</td><td>0.5日</td></tr>
-        <tr><td>不良/手直し率</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-        <tr><td>原価CD</td><td>—</td><td>310K USD/年</td></tr>
-      </table>
-    </div>
-    <div class="card" style="border-left-color:var(--ops);">
-      <h3>HOW — 投資の順序</h3>
-      <ul>
-        <li><b>2026</b>：基盤（Logikal・UniLink）＋小改善 ＋建屋4案調査</li>
-        <li><b>2027</b>：設備（自動切断/加工・MES）＋ライン化</li>
-        <li><b>2028</b>：最適化・横展・台帳運用定着</li>
-      </ul>
-    </div>
+  <div class="kicker">結論</div>
+  <h2>トータルROI 回収カーブ（累積純キャッシュフロー）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
+      <!-- 軸 -->
+      <line class="ax" x1="90" y1="40" x2="90" y2="500"/>
+      <line class="ax" x1="90" y1="500" x2="970" y2="500"/>
+      <!-- ゼロライン -->
+      <line x1="90" y1="224" x2="970" y2="224" stroke="#b4541a" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <text x="100" y="216" font-size="18" fill="#b4541a">損益分岐 0</text>
+      <!-- y目盛 -->
+      <text x="82" y="72"  text-anchor="end" font-size="18" fill="#5b6b7f">+400K</text>
+      <text x="82" y="228" text-anchor="end" font-size="18" fill="#5b6b7f">0</text>
+      <text x="82" y="466" text-anchor="end" font-size="18" fill="#5b6b7f">-600K</text>
+      <!-- x目盛 -->
+      <text x="90"  y="528" text-anchor="middle" font-size="20" fill="#1a2330">2026</text>
+      <text x="307" y="528" text-anchor="middle" font-size="20" fill="#1a2330">2027</text>
+      <text x="525" y="528" text-anchor="middle" font-size="20" fill="#1a2330">2028</text>
+      <text x="742" y="528" text-anchor="middle" font-size="20" fill="#1a2330">2029</text>
+      <text x="960" y="528" text-anchor="middle" font-size="20" fill="#1a2330">2030</text>
+      <!-- 折れ線：純CF (USD K) -55,-509,-226,+57,+340 -->
+      <polyline points="90,249 307,458 525,328 742,198 960,68"
+        fill="none" stroke="#0a7d8c" stroke-width="4"/>
+      <!-- 損益分岐マーカー -->
+      <circle cx="699" cy="224" r="9" fill="#fff" stroke="#b4541a" stroke-width="3"/>
+      <text x="699" y="190" text-anchor="middle" font-size="19" font-weight="700" fill="#b4541a">回収 ≈ 2.9年</text>
+      <!-- データ点 -->
+      <g fill="#0f3d5e">
+        <circle cx="90" cy="249" r="6"/><circle cx="307" cy="458" r="6"/>
+        <circle cx="525" cy="328" r="6"/><circle cx="742" cy="198" r="6"/><circle cx="960" cy="68" r="6"/>
+      </g>
+      <text x="307" y="486" text-anchor="middle" font-size="17" fill="#5b6b7f">-509K（設備投資ピーク）</text>
+      <text x="960" y="56" text-anchor="end" font-size="17" fill="#1d7a46">+340K</text>
+      <text x="500" y="34" text-anchor="middle" font-size="17" fill="#5b6b7f">単位：累積純CF（USD・@150／🟡立上率 30→80→100%）</text>
+    </svg>
   </div>
-  <div class="card" style="margin-top:6mm;border-left-color:var(--head);">
-    <h3>結論（1行）</h3>
-    <p style="font-size:13pt;"><b>トータル投資 約123百万円／トータルCD 約310K USD・年（≒46.5百万円）／統合回収 約2.9年（@150・為替頑健 ±0.2年）。基盤先行＋改善即効で2026年から効果、建屋判断と独立に着工可能。</b></p>
-  </div>
-  <div class="meta"><span>A. ストーリー骨子</span><span>FX: USD/JPY = 150</span></div>
+  <div class="take">設備投資が <b>2027年に集中</b>して谷を打ち、<b>2029年初に損益分岐（≒2.9年）</b>。以降は年 +283K USD が積み上がる。</div>
+  <div class="meta"><span>結論：回収カーブ</span><span>純CD 283K USD/年</span></div>
+  <div class="pageno">2</div>
 </div>
 
-<!-- ============ B. 投資ポートフォリオ一覧 ============ -->
+<!-- ===== 3. 投資内訳 ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section B</div>
-  <h2>B. 投資ポートフォリオ一覧表（＝生きた台帳本体）</h2>
-  <p class="sub">★新規発注が出たら、この表に <b>1行追加</b> するだけ。D節のROIモデルが自動で再計算される設計。</p>
-  <table>
-    <thead>
-      <tr><th>#</th><th>テーマ名</th><th>カテゴリ</th><th class="num">投資額(JPY)</th><th class="num">年間CD(USD)</th><th class="num">単体回収(年)</th><th>依存先</th><th>ステータス</th><th>発注予定日</th><th>担当</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>1</td><td>Logikal導入</td><td><span class="pill p-base">基盤</span></td><td class="num">10.0M <span class="tbd">TBD</span></td><td class="num">171K</td><td class="num">~0.5</td><td>—</td><td>進行中</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-      <tr><td>2</td><td>自動切断機・自動加工機（DEMAC等）</td><td><span class="pill p-equip">設備</span></td><td class="num">90.0M <span class="tbd">TBD</span></td><td class="num">70K <span class="tbd">TBD</span></td><td class="num">~8.6</td><td>1,3</td><td>検討</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-      <tr><td>3</td><td>UniLink（CNC変換・3D干渉・加工順最適化）</td><td><span class="pill p-base">基盤</span></td><td class="num">8.0M <span class="tbd">TBD</span></td><td class="num">14K <span class="tbd">TBD</span></td><td class="num">—</td><td>1</td><td>検討</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-      <tr><td>4</td><td>MES（生産実績DB・バーコード）</td><td><span class="pill p-base">基盤</span></td><td class="num">15.0M <span class="tbd">TBD</span></td><td class="num">20K <span class="tbd">TBD</span></td><td class="num">—</td><td>1,3</td><td>検討</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-      <tr><td>5</td><td>建屋計画（耐震 or 新棟・4案）</td><td><span class="pill p-build">建屋</span></td><td class="num tbd">別票/TBD</td><td class="num">—</td><td class="num">—</td><td>独立</td><td>4案検討</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-      <tr><td>6</td><td>TBラインのライン化（LT 3→0.5日）</td><td><span class="pill p-ops">運用</span></td><td class="num">7.0M <span class="tbd">TBD</span></td><td class="num">35K <span class="tbd">TBD</span></td><td class="num">~1.3</td><td>2</td><td>計画</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-      <tr><td>7</td><td>小改善群（掃除時間短縮・補強材作業改善 等）</td><td><span class="pill p-ops">運用</span></td><td class="num">3.0M <span class="tbd">TBD</span></td><td class="num">20K <span class="tbd">TBD</span></td><td class="num">~1.0</td><td>—</td><td>随時</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
-    </tbody>
-    <tfoot>
-      <tr style="font-weight:700;background:#eef3f8;"><td colspan="3">合計（建屋を除く）</td><td class="num">123.0M</td><td class="num">310K</td><td class="num">~2.9</td><td colspan="4"></td></tr>
-    </tfoot>
-  </table>
-  <p class="legend">カテゴリ凡例：<span class="pill p-base">基盤</span> 全体を支えるデータ/IT　<span class="pill p-equip">設備</span> 製造ハード　<span class="pill p-build">建屋</span> 独立評価（合算しない）　<span class="pill p-ops">運用</span> 改善/ライン化　／ 投資・CDのテーマ別内訳は <span class="tbd">TBD</span>（総額123M・310Kのみ確定）。</p>
-  <div class="meta"><span>B. 投資ポートフォリオ一覧</span><span>更新は本表に1行追加 → D節へ反映</span></div>
+  <div class="kicker">投資構成</div>
+  <h2>投資 123百万円のテーマ別内訳（🟡仮説・合計整合）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
+      <!-- 行: ラベル(右寄せ x215) + バー(x230..960, max80→730) -->
+      <!-- 自動切断/加工 80 -->
+      <text x="215" y="68"  text-anchor="end" font-size="22">自動切断機・自動加工機</text>
+      <rect x="230" y="44" width="730" height="44" rx="4" fill="#3a6ea5"/>
+      <text x="945" y="74" text-anchor="end" class="barlabel">80M</text>
+      <!-- MES 15 -->
+      <text x="215" y="138" text-anchor="end" font-size="22">MES</text>
+      <rect x="230" y="114" width="137" height="44" rx="4" fill="#0a7d8c"/>
+      <text x="380" y="144" class="barval" fill="#0f3d5e">15M</text>
+      <!-- Logikal 10 -->
+      <text x="215" y="208" text-anchor="end" font-size="22">Logikal導入</text>
+      <rect x="230" y="184" width="91" height="44" rx="4" fill="#0a7d8c"/>
+      <text x="334" y="214" class="barval" fill="#0f3d5e">10M</text>
+      <!-- UniLink 8 -->
+      <text x="215" y="278" text-anchor="end" font-size="22">UniLink</text>
+      <rect x="230" y="254" width="73" height="44" rx="4" fill="#0a7d8c"/>
+      <text x="316" y="284" class="barval" fill="#0f3d5e">8M</text>
+      <!-- ライン化 7 -->
+      <text x="215" y="348" text-anchor="end" font-size="22">TBラインのライン化</text>
+      <rect x="230" y="324" width="64" height="44" rx="4" fill="#1d7a46"/>
+      <text x="307" y="354" class="barval" fill="#0f3d5e">7M</text>
+      <!-- 小改善 3 -->
+      <text x="215" y="418" text-anchor="end" font-size="22">小改善群</text>
+      <rect x="230" y="394" width="27" height="44" rx="4" fill="#1d7a46"/>
+      <text x="270" y="424" class="barval" fill="#0f3d5e">3M</text>
+      <!-- 凡例 -->
+      <rect x="230" y="455" width="18" height="18" fill="#0a7d8c"/><text x="254" y="470" font-size="17" fill="#5b6b7f">基盤</text>
+      <rect x="330" y="455" width="18" height="18" fill="#3a6ea5"/><text x="354" y="470" font-size="17" fill="#5b6b7f">設備</text>
+      <rect x="430" y="455" width="18" height="18" fill="#1d7a46"/><text x="454" y="470" font-size="17" fill="#5b6b7f">運用</text>
+      <text x="960" y="470" text-anchor="end" font-size="16" fill="#b00020">※建屋は独立軸（合算しない）</text>
+    </svg>
+  </div>
+  <div class="take">投資の <b>65%（80M）は自動切断/加工設備</b> に集中。基盤(Logikal/UniLink/MES)は計33Mだが全体のスイッチを握る。</div>
+  <div class="meta"><span>投資構成（合計123M）</span><span>🟡内訳は仮説・確定総額に整合</span></div>
+  <div class="pageno">3</div>
 </div>
 
-<!-- ============ C. 依存関係マップ ============ -->
+<!-- ===== 4. CD効果内訳 ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section C</div>
-  <h2>C. テーマ間の依存関係マップ</h2>
-  <div class="flow" style="margin:3mm 0 5mm;">
-    <span class="node core">① Logikal（基盤）</span><span class="arrow">→</span>
-    <span class="node">③ UniLink</span><span class="arrow">→</span>
-    <span class="node">② 自動切断/加工</span>
-    <span class="arrow">／</span><span class="node">④ MES</span>
-    <span class="arrow">→</span><span class="node">⑥ ライン化</span>
-    <span class="arrow">→</span><span class="node">⑦ 小改善</span>
+  <div class="kicker">効果構成</div>
+  <h2>年間CD 310K USD の内訳（Logikalが過半）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
+      <!-- max 171 → 730px, scale 4.269 -->
+      <text x="215" y="68"  text-anchor="end" font-size="22" font-weight="700">Logikal導入</text>
+      <rect x="230" y="44" width="730" height="44" rx="4" fill="#0f3d5e"/>
+      <text x="945" y="74" text-anchor="end" class="barlabel">171K（55%）</text>
+      <text x="215" y="138" text-anchor="end" font-size="22">自動切断/加工</text>
+      <rect x="230" y="114" width="299" height="44" rx="4" fill="#3a6ea5"/>
+      <text x="542" y="144" class="barval" fill="#0f3d5e">70K</text>
+      <text x="215" y="208" text-anchor="end" font-size="22">TBラインのライン化</text>
+      <rect x="230" y="184" width="128" height="44" rx="4" fill="#1d7a46"/>
+      <text x="371" y="214" class="barval" fill="#0f3d5e">30K</text>
+      <text x="215" y="278" text-anchor="end" font-size="22">MES</text>
+      <rect x="230" y="254" width="64" height="44" rx="4" fill="#0a7d8c"/>
+      <text x="307" y="284" class="barval" fill="#0f3d5e">15K</text>
+      <text x="215" y="348" text-anchor="end" font-size="22">UniLink</text>
+      <rect x="230" y="324" width="60" height="44" rx="4" fill="#0a7d8c"/>
+      <text x="303" y="354" class="barval" fill="#0f3d5e">14K</text>
+      <text x="215" y="418" text-anchor="end" font-size="22">小改善群</text>
+      <rect x="230" y="394" width="43" height="44" rx="4" fill="#1d7a46"/>
+      <text x="286" y="424" class="barval" fill="#0f3d5e">10K</text>
+      <text x="960" y="470" text-anchor="end" font-size="16" fill="#b00020">※Logikal以外の配分は🟡仮説（合計310Kに整合）</text>
+    </svg>
   </div>
-  <div class="grid2">
-    <div>
-      <h3>連鎖停止マトリクス（行が止まると列が停止）</h3>
-      <table>
-        <thead><tr><th>止まる元 ＼ 影響先</th><th>②設備</th><th>③UniLink</th><th>④MES</th><th>⑥ライン化</th></tr></thead>
-        <tbody>
-          <tr><td><b>① Logikal</b></td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
-          <tr><td><b>③ UniLink</b></td><td>●</td><td>—</td><td>○</td><td>●</td></tr>
-          <tr><td><b>② 設備</b></td><td>—</td><td>—</td><td>○</td><td>●</td></tr>
-        </tbody>
-      </table>
-      <p class="legend">● 直接停止　○ 機能低下　／ <b>単一障害点＝① Logikal</b>。停止時のCDリスク ≒ 151K USD/年（Logikal純CD）＋ 自動化連動分。</p>
-    </div>
-    <div>
-      <h3>発注タイミング判定</h3>
-      <table>
-        <thead><tr><th>区分</th><th>テーマ</th><th>理由</th></tr></thead>
-        <tbody>
-          <tr><td><b>先行発注すべき</b></td><td>① Logikal / ③ UniLink</td><td>全体の基盤・最長LT・依存元</td></tr>
-          <tr><td>先行（即効）</td><td>⑦ 小改善</td><td>低コスト・依存なし・早期CD</td></tr>
-          <tr><td>基盤確立後</td><td>② 設備 / ④ MES</td><td>基盤データに依存</td></tr>
-          <tr><td>設備後</td><td>⑥ ライン化</td><td>設備の据付に依存</td></tr>
-          <tr><td><b>独立・待てる</b></td><td>⑤ 建屋</td><td>別軸評価／自動化と非依存</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="card" style="margin-top:4mm;border-left-color:var(--warn);">
-    <h3>基盤リスクの低減（投資の前提条件）</h3>
-    <p>段階検証（①→③→②）／旧手順（手動NC）フォールバック保持／UniLinkを疎結合IF化し基盤停止時の退避運転を確保。</p>
-  </div>
-  <div class="meta"><span>C. 依存関係マップ</span><span>建屋⑤は独立軸</span></div>
+  <div class="take">CDの <b>55%はLogikal</b>。効果も基盤に集中＝<b>基盤が止まれば効果の大半が消える</b>（次頁の依存構造へ）。</div>
+  <div class="meta"><span>効果構成（合計310K USD）</span><span>うちLogikal 171K</span></div>
+  <div class="pageno">4</div>
 </div>
 
-<!-- ============ D. トータルROI計算モデル ============ -->
+<!-- ===== 5. 依存関係マップ ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section D</div>
-  <h2>D. トータルROI計算モデル</h2>
-  <div class="grid2">
-    <div>
-      <h3>入力 → 出力（計算式）</h3>
-      <table>
-        <tr><th>項目</th><th>式 / 値</th></tr>
-        <tr><td>投資(USD)</td><td>Σ投資(JPY) ÷ FX ＝ 123M ÷ 150 = <b>820K</b></td></tr>
-        <tr><td>継続費(USD/年)</td><td>Σ継続(JPY) ÷ FX ＝ 4.0M ÷ 150 = 26.7K</td></tr>
-        <tr><td>純CD(USD/年)</td><td>ΣCD − 継続費 = 310K − 26.7K = <b>283K</b></td></tr>
-        <tr><td>単純回収(年)</td><td>投資 ÷ 純CD = 820K ÷ 283K ≈ <b>2.9</b></td></tr>
-        <tr><td>累積CF(t)</td><td>−投資 + Σ[純CD × 立上率(t)]</td></tr>
-      </table>
-      <p class="legend">立上率：2026≈30%／2027≈80%／2028≈100%（<span class="tbd">TBD: 実績で更新</span>）</p>
-      <h3>累積キャッシュフロー（@150・ランプ反映）</h3>
-      <table>
-        <thead><tr><th>年</th><th class="num">投資累計(USD)</th><th class="num">CD累計(USD)</th><th class="num">純CF(USD)</th></tr></thead>
-        <tbody>
-          <tr><td>2026</td><td class="num tbd">TBD</td><td class="num">~85K</td><td class="num tbd">TBD</td></tr>
-          <tr><td>2027</td><td class="num tbd">TBD</td><td class="num">~311K</td><td class="num tbd">TBD</td></tr>
-          <tr><td>2028</td><td class="num">820K</td><td class="num">~594K</td><td class="num">回収完了見込</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <h3>感度分析① 為替（USD/JPY）</h3>
-      <table>
-        <thead><tr><th>FX</th><th class="num">投資(USD)</th><th class="num">純CD(USD/年)</th><th class="num">回収(年)</th></tr></thead>
-        <tbody>
-          <tr><td>140（円高）</td><td class="num">878.6K</td><td class="num">281.4K</td><td class="num">3.12</td></tr>
-          <tr style="font-weight:700;background:#eef3f8;"><td>150（基準）</td><td class="num">820.0K</td><td class="num">283.3K</td><td class="num">2.89</td></tr>
-          <tr><td>160（円安）</td><td class="num">768.8K</td><td class="num">285.0K</td><td class="num">2.70</td></tr>
-        </tbody>
-      </table>
-      <p class="legend">CD=USD・投資=JPYで自然ヘッジ → 感度小（±0.2年）。CDがIDR経由なら二段感度を追加 <span class="tbd">（TBD）</span>。</p>
-      <h3>感度分析② CD達成率 × 遅延</h3>
-      <table>
-        <thead><tr><th>シナリオ</th><th class="num">CD達成</th><th class="num">回収(年)</th></tr></thead>
-        <tbody>
-          <tr><td>強気</td><td class="num">110%</td><td class="num">~2.6</td></tr>
-          <tr><td>基準</td><td class="num">100%</td><td class="num">~2.9</td></tr>
-          <tr><td>弱気（達成80%＋6ヶ月遅延）</td><td class="num">80%</td><td class="num">~3.8</td></tr>
-        </tbody>
-      </table>
-      <p class="legend"><b>Excel化</b>：B表をデータ範囲にし、投資/CD/立上率/FXを入力セル → 上表をSUMIF＋年度按分で算出。テンプレは [[トータルROI台帳]] に格納。</p>
-    </div>
+  <div class="kicker">依存構造</div>
+  <h2>テーマ依存マップ — 単一障害点は Logikal</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#5b6b7f"/>
+        </marker>
+      </defs>
+      <!-- Layer 0: Logikal core -->
+      <rect x="350" y="30" width="300" height="70" rx="8" fill="#0f3d5e"/>
+      <text x="500" y="63" text-anchor="middle" font-size="24" font-weight="700" fill="#fff">① Logikal（データ基盤）</text>
+      <text x="500" y="88" text-anchor="middle" font-size="16" fill="#cfe0ea">設計→BOM→加工データの単一ソース</text>
+      <!-- 単一障害点バッジ -->
+      <rect x="660" y="34" width="150" height="30" rx="15" fill="#c0392b"/>
+      <text x="735" y="55" text-anchor="middle" font-size="16" font-weight="700" fill="#fff">単一障害点</text>
+      <line x1="500" y1="100" x2="500" y2="140" stroke="#5b6b7f" stroke-width="2.5" marker-end="url(#arr)"/>
+      <!-- Layer 1: UniLink -->
+      <rect x="350" y="142" width="300" height="60" rx="8" fill="#eef8f9" stroke="#0a7d8c" stroke-width="2"/>
+      <text x="500" y="178" text-anchor="middle" font-size="22" font-weight="700" fill="#0f3d5e">③ UniLink（連携層）</text>
+      <!-- 分岐 -->
+      <line x1="500" y1="202" x2="500" y2="225" stroke="#5b6b7f" stroke-width="2.5"/>
+      <line x1="200" y1="225" x2="800" y2="225" stroke="#5b6b7f" stroke-width="2.5"/>
+      <line x1="200" y1="225" x2="200" y2="265" stroke="#5b6b7f" stroke-width="2.5" marker-end="url(#arr)"/>
+      <line x1="500" y1="225" x2="500" y2="265" stroke="#5b6b7f" stroke-width="2.5" marker-end="url(#arr)"/>
+      <line x1="800" y1="225" x2="800" y2="265" stroke="#5b6b7f" stroke-width="2.5" marker-end="url(#arr)"/>
+      <!-- Layer 2 -->
+      <rect x="80"  y="267" width="240" height="60" rx="8" fill="#eaf0f7" stroke="#3a6ea5" stroke-width="2"/>
+      <text x="200" y="303" text-anchor="middle" font-size="21" font-weight="700" fill="#0f3d5e">② 自動切断/加工</text>
+      <rect x="380" y="267" width="240" height="60" rx="8" fill="#eef8f9" stroke="#0a7d8c" stroke-width="2"/>
+      <text x="500" y="303" text-anchor="middle" font-size="21" font-weight="700" fill="#0f3d5e">④ MES</text>
+      <rect x="680" y="267" width="240" height="60" rx="8" fill="#eef7f1" stroke="#1d7a46" stroke-width="2"/>
+      <text x="800" y="303" text-anchor="middle" font-size="21" font-weight="700" fill="#0f3d5e">⑥ ライン化</text>
+      <!-- to layer 3 -->
+      <line x1="500" y1="327" x2="500" y2="367" stroke="#5b6b7f" stroke-width="2.5" marker-end="url(#arr)"/>
+      <rect x="350" y="369" width="300" height="56" rx="8" fill="#eef7f1" stroke="#1d7a46" stroke-width="2"/>
+      <text x="500" y="403" text-anchor="middle" font-size="21" font-weight="700" fill="#0f3d5e">⑦ 小改善群／現場最適化</text>
+      <!-- 独立軸 建屋 -->
+      <rect x="700" y="120" width="240" height="60" rx="8" fill="#fbf6ee" stroke="#8a6d3b" stroke-width="2" stroke-dasharray="7 5"/>
+      <text x="820" y="148" text-anchor="middle" font-size="20" font-weight="700" fill="#8a6d3b">⑤ 建屋（4案）</text>
+      <text x="820" y="170" text-anchor="middle" font-size="15" fill="#8a6d3b">独立軸・非依存</text>
+    </svg>
   </div>
-  <div class="meta"><span>D. トータルROI計算モデル</span><span>入力はB表・運用はF節</span></div>
+  <div class="take">全テーマが <b>Logikal基盤の上に積層</b>。基盤停止＝②③④⑥が連鎖停止 → <b>冗長化・フォールバックを投資の前提条件に</b>。</div>
+  <div class="meta"><span>依存構造</span><span>建屋は独立軸</span></div>
+  <div class="pageno">5</div>
 </div>
 
-<!-- ============ E. 発注優先順位の判定ルール ============ -->
+<!-- ===== 6. 連鎖停止マトリクス ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section E</div>
-  <h2>E. 発注優先順位の判定ルール</h2>
-  <p class="sub">スコア = 基盤性×0.4 ＋ 独立性×0.2 ＋ LT緊急度×0.2 ＋ 投資効率×0.2（各1–5点）。高スコアほど先行発注。</p>
-  <table>
-    <thead><tr><th>#</th><th>テーマ</th><th class="num">基盤性</th><th class="num">建屋独立性</th><th class="num">LT緊急度</th><th class="num">投資効率(回収)</th><th class="num">スコア</th><th>判定</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>Logikal</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num">5</td><td class="num"><b>5.0</b></td><td>最優先・先行発注</td></tr>
-      <tr><td>3</td><td>UniLink</td><td class="num">5</td><td class="num">5</td><td class="num">4</td><td class="num">3</td><td class="num"><b>4.4</b></td><td>先行発注</td></tr>
-      <tr><td>7</td><td>小改善群</td><td class="num">2</td><td class="num">5</td><td class="num">3</td><td class="num">5</td><td class="num"><b>3.4</b></td><td>即着手（低リスク）</td></tr>
-      <tr><td>2</td><td>自動切断/加工</td><td class="num">3</td><td class="num">4</td><td class="num">3</td><td class="num">2</td><td class="num"><b>3.0</b></td><td>基盤確立後</td></tr>
-      <tr><td>4</td><td>MES</td><td class="num">4</td><td class="num">4</td><td class="num">2</td><td class="num">3</td><td class="num"><b>3.4</b></td><td>基盤と並行</td></tr>
-      <tr><td>6</td><td>ライン化</td><td class="num">2</td><td class="num">3</td><td class="num">3</td><td class="num">4</td><td class="num"><b>2.8</b></td><td>設備後</td></tr>
-      <tr><td>5</td><td>建屋(4案)</td><td class="num">1</td><td class="num">—</td><td class="num">2</td><td class="num">—</td><td class="num"><b>—</b></td><td>独立軸で別判定</td></tr>
-    </tbody>
-  </table>
-  <div class="grid2" style="margin-top:4mm;">
-    <div class="card"><h3>判定の原則</h3>
-      <ul><li>依存元（基盤）は必ず依存先より先に発注</li><li>建屋判断を待たずに進める＝独立性高を優先</li><li>同点はLTの長い方を先行</li></ul></div>
-    <div class="card" style="border-left-color:var(--warn);"><h3>ストップ条件</h3>
-      <ul><li>基盤(①③)の検収未完なら ② の最終発注は保留</li><li>CD前提が <span class="tbd">TBD</span> のテーマは稟議前に内訳確定</li></ul></div>
+  <div class="kicker">リスク連鎖</div>
+  <h2>連鎖停止マトリクス（行が止まると列が停止）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 470" preserveAspectRatio="xMidYMid meet">
+      <!-- 列ヘッダ x: 350,520,690,860 ; 行 y: 150,260,370 -->
+      <text x="160" y="95" font-size="20" font-weight="700" fill="#0f3d5e">止まる元 ＼ 影響先</text>
+      <text x="350" y="95" text-anchor="middle" font-size="20" font-weight="700" fill="#0f3d5e">②設備</text>
+      <text x="520" y="95" text-anchor="middle" font-size="20" font-weight="700" fill="#0f3d5e">③UniLink</text>
+      <text x="690" y="95" text-anchor="middle" font-size="20" font-weight="700" fill="#0f3d5e">④MES</text>
+      <text x="860" y="95" text-anchor="middle" font-size="20" font-weight="700" fill="#0f3d5e">⑥ライン化</text>
+      <!-- 行ラベル -->
+      <text x="60" y="160" font-size="21" font-weight="700" fill="#0f3d5e">① Logikal</text>
+      <text x="60" y="270" font-size="21" font-weight="700" fill="#0f3d5e">③ UniLink</text>
+      <text x="60" y="380" font-size="21" font-weight="700" fill="#0f3d5e">② 設備</text>
+      <!-- セル: full=red ●, partial=amber ○, none=— -->
+      <!-- 行1 Logikal: ●●●● -->
+      <g>
+        <circle cx="350" cy="153" r="26" fill="#c0392b"/><circle cx="520" cy="153" r="26" fill="#c0392b"/>
+        <circle cx="690" cy="153" r="26" fill="#c0392b"/><circle cx="860" cy="153" r="26" fill="#c0392b"/>
+      </g>
+      <!-- 行2 UniLink: ● — ○ ● -->
+      <circle cx="350" cy="263" r="26" fill="#c0392b"/>
+      <text x="520" y="273" text-anchor="middle" font-size="26" fill="#9fb0c0">—</text>
+      <circle cx="690" cy="263" r="22" fill="none" stroke="#e0a106" stroke-width="5"/>
+      <circle cx="860" cy="263" r="26" fill="#c0392b"/>
+      <!-- 行3 設備: — — ○ ● -->
+      <text x="350" y="383" text-anchor="middle" font-size="26" fill="#9fb0c0">—</text>
+      <text x="520" y="383" text-anchor="middle" font-size="26" fill="#9fb0c0">—</text>
+      <circle cx="690" cy="373" r="22" fill="none" stroke="#e0a106" stroke-width="5"/>
+      <circle cx="860" cy="373" r="26" fill="#c0392b"/>
+      <!-- 凡例 -->
+      <circle cx="360" cy="440" r="13" fill="#c0392b"/><text x="382" y="447" font-size="18" fill="#5b6b7f">直接停止</text>
+      <circle cx="520" cy="440" r="11" fill="none" stroke="#e0a106" stroke-width="4"/><text x="540" y="447" font-size="18" fill="#5b6b7f">機能低下</text>
+      <text x="700" y="447" font-size="18" fill="#5b6b7f">— 影響なし</text>
+    </svg>
   </div>
-  <div class="meta"><span>E. 発注優先順位</span><span>重み付けは経営方針で調整可</span></div>
+  <div class="take">Logikal停止は <b>4テーマ全停止</b>＝CDリスク約 <b>151K USD/年＋自動化連動分</b>。基盤の可用性が最重要KPI。</div>
+  <div class="meta"><span>連鎖停止マトリクス</span><span>最上段＝最大リスク</span></div>
+  <div class="pageno">6</div>
 </div>
 
-<!-- ============ F. 更新運用ルール ============ -->
+<!-- ===== 7. ロードマップ（ガント） ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section F</div>
-  <h2>F. 更新運用ルール（生きた台帳の回し方）</h2>
-  <div class="grid2">
-    <div>
-      <h3>誰が・いつ・何を</h3>
-      <table>
-        <thead><tr><th>タイミング</th><th>担当</th><th>更新内容</th></tr></thead>
-        <tbody>
-          <tr><td>発注の都度</td><td>生産技術</td><td>B表に1行追加、ステータス更新</td></tr>
-          <tr><td>月次</td><td>原価/経理</td><td>実績CD計上、累積CF更新</td></tr>
-          <tr><td>四半期</td><td>経営レビュー</td><td>回収見通し・優先順位の見直し</td></tr>
-          <tr><td>為替変動時</td><td>経理</td><td>FX前提・感度の更新</td></tr>
-        </tbody>
-      </table>
-      <h3>発注ごとの記録項目</h3>
-      <ul>
-        <li>見積額／契約額／通貨／記録時FX</li>
-        <li>発注日・納期・検収日・稼働日</li>
-        <li>計画CD／実績CD（稼働後）</li>
-        <li>依存先テーマ・稟議番号・子ノートリンク</li>
-      </ul>
-    </div>
-    <div>
-      <h3>ステータス遷移</h3>
-      <div class="flow">
-        <span class="node">見積</span><span class="arrow">→</span>
-        <span class="node">稟議</span><span class="arrow">→</span>
-        <span class="node">発注</span><span class="arrow">→</span>
-        <span class="node">入荷</span><span class="arrow">→</span>
-        <span class="node">検収</span><span class="arrow">→</span>
-        <span class="node core">稼働</span><span class="arrow">→</span>
-        <span class="node">効果計上</span>
-      </div>
-      <div class="card" style="margin-top:4mm;">
-        <h3>レビューの仕組み</h3>
-        <ul>
-          <li><b>月次</b>：実績CD vs 計画、遅延フラグ確認</li>
-          <li><b>四半期</b>：トータル回収の再計算、E節スコア再評価、発注ゲート判定</li>
-          <li><b>年次</b>：FX前提・立上率の見直し、子ノート棚卸し</li>
-        </ul>
-      </div>
-      <p class="legend">単一情報源（SSOT）は [[トータルROI台帳]]。本ノートは要約ハブとして同期。</p>
-    </div>
+  <div class="kicker">ロードマップ</div>
+  <h2>段階投資ガント（2026 基盤 → 2027 設備 → 2028 最適化）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet">
+      <!-- フェーズ背景: 2026 x200-460, 2027 460-720, 2028 720-980 -->
+      <rect x="200" y="60" width="260" height="404" fill="#eef4f8"/>
+      <rect x="460" y="60" width="260" height="404" fill="#eaf0f7"/>
+      <rect x="720" y="60" width="260" height="404" fill="#eef7f1"/>
+      <text x="330" y="50" text-anchor="middle" font-size="22" font-weight="700" fill="#0a7d8c">2026 基盤＋即効</text>
+      <text x="590" y="50" text-anchor="middle" font-size="22" font-weight="700" fill="#3a6ea5">2027 設備＋見える化</text>
+      <text x="850" y="50" text-anchor="middle" font-size="22" font-weight="700" fill="#1d7a46">2028 最適化＋横展</text>
+      <!-- 四半期グリッド -->
+      <g stroke="#d7e0e8" stroke-width="1">
+        <line x1="265" y1="60" x2="265" y2="464"/><line x1="330" y1="60" x2="330" y2="464"/><line x1="395" y1="60" x2="395" y2="464"/>
+        <line x1="525" y1="60" x2="525" y2="464"/><line x1="590" y1="60" x2="590" y2="464"/><line x1="655" y1="60" x2="655" y2="464"/>
+        <line x1="785" y1="60" x2="785" y2="464"/><line x1="850" y1="60" x2="850" y2="464"/><line x1="915" y1="60" x2="915" y2="464"/>
+      </g>
+      <line x1="200" y1="60" x2="200" y2="464" class="ax"/>
+      <!-- バー: 行 y 70..,step52, h30 -->
+      <!-- Logikal q0-1: 200-330 -->
+      <text x="190" y="92" text-anchor="end" font-size="19">① Logikal</text>
+      <rect x="200" y="70" width="130" height="30" rx="5" fill="#0a7d8c"/>
+      <!-- UniLink q1-2: 265-395 -->
+      <text x="190" y="144" text-anchor="end" font-size="19">③ UniLink</text>
+      <rect x="265" y="122" width="130" height="30" rx="5" fill="#0a7d8c"/>
+      <!-- 小改善 継続 q0-11: 200-980 -->
+      <text x="190" y="196" text-anchor="end" font-size="19">⑦ 小改善（継続）</text>
+      <rect x="200" y="174" width="780" height="30" rx="5" fill="#1d7a46" opacity="0.55"/>
+      <!-- 建屋スタディ q0-2 独立 -->
+      <text x="190" y="248" text-anchor="end" font-size="19" fill="#8a6d3b">⑤ 建屋スタディ（独立）</text>
+      <rect x="200" y="226" width="195" height="30" rx="5" fill="none" stroke="#8a6d3b" stroke-width="2.5" stroke-dasharray="7 5"/>
+      <!-- MES q3-5: 395-590 -->
+      <text x="190" y="300" text-anchor="end" font-size="19">④ MES</text>
+      <rect x="395" y="278" width="195" height="30" rx="5" fill="#0a7d8c"/>
+      <!-- 設備 q4-6: 460-655 -->
+      <text x="190" y="352" text-anchor="end" font-size="19">② 自動切断/加工</text>
+      <rect x="460" y="330" width="195" height="30" rx="5" fill="#3a6ea5"/>
+      <!-- ライン化 q6-7: 590-720 -->
+      <text x="190" y="404" text-anchor="end" font-size="19">⑥ ライン化</text>
+      <rect x="590" y="382" width="130" height="30" rx="5" fill="#1d7a46"/>
+      <!-- 最適化/台帳 q8-11: 720-980 -->
+      <text x="190" y="456" text-anchor="end" font-size="19">最適化・台帳運用</text>
+      <rect x="720" y="434" width="260" height="30" rx="5" fill="#0f3d5e"/>
+    </svg>
   </div>
-  <div class="meta"><span>F. 更新運用ルール</span><span>SSOT = トータルROI台帳</span></div>
+  <div class="take">基盤(①③)と小改善(⑦)を先行、設備(②④)は2027集中、2028は刈り取りと台帳運用。<b>建屋は独立で並走</b>。</div>
+  <div class="meta"><span>段階ロードマップ</span><span>四半期グリッド</span></div>
+  <div class="pageno">7</div>
 </div>
 
-<!-- ============ G. リスクと対策 ============ -->
+<!-- ===== 8. 発注優先順位（バブル） ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section G</div>
-  <h2>G. リスクと対策一覧（影響度 × 発生確率）</h2>
-  <table>
-    <thead><tr><th>#</th><th>リスク</th><th class="num">影響度</th><th class="num">発生確率</th><th class="num">重大度</th><th>対策</th><th>担当</th></tr></thead>
-    <tbody>
-      <tr><td>R1</td><td><b>Logikal基盤停止</b>（単一障害点）→ ②③④⑥連鎖停止</td><td class="num">高</td><td class="num">低</td><td class="num"><b>高</b></td><td>冗長化・退避運転・旧手順フォールバック</td><td>automation</td></tr>
-      <tr><td>R2</td><td>DB/連携開発の遅延（UniLink・MES）</td><td class="num">中</td><td class="num">中</td><td class="num"><b>高</b></td><td>段階リリース・受入基準明確化・予備工数</td><td>IT/生技</td></tr>
-      <tr><td>R3</td><td>為替変動（USD/JPY、IDR経由なら二段）</td><td class="num">中</td><td class="num">中</td><td class="num">中</td><td>自然ヘッジ前提・四半期で前提更新</td><td>経理</td></tr>
-      <tr><td>R4</td><td>契約・発注遅延（LT長物の設備）</td><td class="num">中</td><td class="num">中</td><td class="num">中</td><td>先行発注・分割発注・代替ベンダ</td><td>調達</td></tr>
-      <tr><td>R5</td><td>現地の人材確保・技能移転不足</td><td class="num">高</td><td class="num">中</td><td class="num"><b>高</b></td><td>教育カリキュラム・多能工化・標準書</td><td>製造/品質</td></tr>
-      <tr><td>R6</td><td>一発全数不良／ライン停止波及（自動化・一個流し）</td><td class="num">高</td><td class="num">低</td><td class="num">中</td><td>初物検査標準・ポカヨケ・自工程完結</td><td>品質</td></tr>
-      <tr><td>R7</td><td>固定費化（ライセンス/保守）→物量減で回収悪化</td><td class="num">中</td><td class="num">低</td><td class="num">中</td><td>稼働率と紐付け監視・契約見直し条項</td><td>cost</td></tr>
-      <tr><td>R8</td><td>CD内訳・投資内訳が未確定（TBD）</td><td class="num">中</td><td class="num">高</td><td class="num"><b>高</b></td><td>現地と早期確定（次アクション最優先）</td><td>cost/現地</td></tr>
-    </tbody>
-  </table>
-  <p class="legend">重大度 = 影響度 × 発生確率（高/中/低）。重大度「高」は四半期レビューの必須監視項目。</p>
-  <div class="meta"><span>G. リスクと対策</span><span>重大度「高」: R1/R2/R5/R8</span></div>
+  <div class="kicker">発注優先順位</div>
+  <h2>基盤性 × 投資効率（バブル＝投資額）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet">
+      <!-- 先行発注ゾーン(右上) -->
+      <rect x="505" y="60" width="395" height="215" fill="#eef7f1" opacity="0.7"/>
+      <text x="890" y="84" text-anchor="end" font-size="18" font-weight="700" fill="#1d7a46">先行発注ゾーン</text>
+      <!-- 軸 -->
+      <line class="ax" x1="110" y1="60" x2="110" y2="490"/>
+      <line class="ax" x1="110" y1="490" x2="900" y2="490"/>
+      <text x="505" y="535" text-anchor="middle" class="axlabel">投資効率（回収が速い →）</text>
+      <text x="40" y="275" class="axlabel" transform="rotate(-90 40 275)">基盤性（高 →）</text>
+      <!-- バブル: x=110+(s-1)/4*790, y=490-(b-1)/4*430 -->
+      <!-- 設備 (3,2,80) x=307.5 y=275 r=24 -->
+      <circle cx="307" cy="275" r="36" fill="#3a6ea5" opacity="0.75"/>
+      <text x="307" y="280" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">②設備</text>
+      <text x="307" y="330" text-anchor="middle" font-size="15" fill="#5b6b7f">80M / 回収長</text>
+      <!-- MES (4,3,15) x=505 y=167.5 r=15 -->
+      <circle cx="505" cy="167" r="20" fill="#0a7d8c" opacity="0.85"/>
+      <text x="505" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#fff">④MES</text>
+      <!-- UniLink (5,3,8) x=505 y=60 r=13 -->
+      <circle cx="505" cy="78" r="16" fill="#0a7d8c"/>
+      <text x="505" y="83" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">③</text>
+      <text x="505" y="112" text-anchor="middle" font-size="15" fill="#0f3d5e">UniLink</text>
+      <!-- Logikal (5,5,10) x=900 y=60... inset to 880,78 -->
+      <circle cx="880" cy="78" r="17" fill="#0f3d5e"/>
+      <text x="880" y="83" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">①</text>
+      <text x="880" y="112" text-anchor="middle" font-size="15" font-weight="700" fill="#0f3d5e">Logikal 最優先</text>
+      <!-- 小改善 (2,5,3) x=900→880 y=382.5 r=8 -->
+      <circle cx="880" cy="382" r="11" fill="#1d7a46"/>
+      <text x="880" y="412" text-anchor="middle" font-size="15" fill="#0f3d5e">⑦小改善 即着手</text>
+      <!-- ライン化 (2,4,7) x=702 y=382 r=10 -->
+      <circle cx="702" cy="382" r="14" fill="#1d7a46" opacity="0.85"/>
+      <text x="702" y="416" text-anchor="middle" font-size="15" fill="#0f3d5e">⑥ライン化</text>
+    </svg>
+  </div>
+  <div class="take">右上（基盤性高×即効）＝<b>① Logikal・③ UniLink・⑦ 小改善を先行発注</b>。大型の② 設備は基盤確立後に。</div>
+  <div class="meta"><span>発注優先順位</span><span>バブル径 ∝ 投資額</span></div>
+  <div class="pageno">8</div>
 </div>
 
-<!-- ============ H. 答申・稟議への展開 ============ -->
+<!-- ===== 9. 為替感度 ===== -->
 <div class="slide">
   <span class="tag"></span>
-  <div class="kicker">Section H</div>
-  <h2>H. 答申・稟議への展開</h2>
-  <div class="grid3">
-    <div class="card">
-      <h3>経営層向け1枚サマリ</h3>
-      <ul>
-        <li>表紙＋A節＋D感度を抽出</li>
-        <li>メッセージ：「回収約2.9年・為替頑健・基盤先行で2026から効果・建屋と独立」</li>
-        <li>判断ポイント：① 総額/回収 ② 単一障害点 ③ 建屋非依存</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>個別発注稟議への切り出し</h3>
-      <ul>
-        <li>B表の該当行＋C依存＋D単体回収を抜粋</li>
-        <li>「ポートフォリオ内の位置づけ」を1段落で添付</li>
-        <li>稟議番号を台帳に逆リンク</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3>既存ノートとの接続点</h3>
-      <ul>
-        <li>[[Logikal導入_答申スライド構成案]] → 本ノートA/D節に統合</li>
-        <li>[[Logikal導入ROI]] → B表#1・D節の根拠</li>
-        <li>[[新工場_自動化投資とコストダウン計画まとめ]] → B表全体の源泉</li>
-      </ul>
-    </div>
+  <div class="kicker">感度分析①</div>
+  <h2>為替感度（USD/JPY → 回収年数）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+      <line class="ax" x1="140" y1="60" x2="140" y2="420"/>
+      <line class="ax" x1="140" y1="420" x2="900" y2="420"/>
+      <!-- y目盛 0..3.5 → 420..60 (360px), 1年=102.8px -->
+      <g font-size="18" fill="#5b6b7f">
+        <text x="130" y="426" text-anchor="end">0</text>
+        <text x="130" y="323" text-anchor="end">1</text>
+        <text x="130" y="220" text-anchor="end">2</text>
+        <text x="130" y="117" text-anchor="end">3</text>
+      </g>
+      <line x1="140" y1="117" x2="900" y2="117" class="gridln"/>
+      <line x1="140" y1="220" x2="900" y2="220" class="gridln"/>
+      <line x1="140" y1="323" x2="900" y2="323" class="gridln"/>
+      <!-- バー: 140→3.12(h321), 150→2.89(h297), 160→2.70(h278) ; y=420-h -->
+      <rect x="230" y="99"  width="140" height="321" rx="4" fill="#7f9bb5"/>
+      <text x="300" y="88" text-anchor="middle" class="barval" fill="#0f3d5e">3.12年</text>
+      <text x="300" y="450" text-anchor="middle" font-size="20" fill="#1a2330">140（円高）</text>
+      <rect x="450" y="123" width="140" height="297" rx="4" fill="#0a7d8c"/>
+      <text x="520" y="112" text-anchor="middle" class="barval" fill="#0f3d5e">2.89年</text>
+      <text x="520" y="450" text-anchor="middle" font-size="20" font-weight="700" fill="#0f3d5e">150（基準）</text>
+      <rect x="670" y="142" width="140" height="278" rx="4" fill="#1d7a46"/>
+      <text x="740" y="131" text-anchor="middle" class="barval" fill="#0f3d5e">2.70年</text>
+      <text x="740" y="450" text-anchor="middle" font-size="20" fill="#1a2330">160（円安）</text>
+      <text x="880" y="478" text-anchor="end" font-size="16" fill="#5b6b7f">CD=USD・投資=JPY → 自然ヘッジ</text>
+    </svg>
   </div>
-  <div class="card" style="margin-top:5mm;border-left-color:var(--head);">
-    <h3>再利用の原則</h3>
-    <p>本ノートは<b>束ねるハブ</b>。経営答申・稟議・現場説明は本ノートから<b>切り出して</b>作る（重複管理しない）。数値の真実は [[トータルROI台帳]] に一元化し、各資料はそこを参照する。</p>
-  </div>
-  <div class="meta"><span>H. 答申・稟議への展開</span><span>切り出し元 = 本ノート</span></div>
+  <div class="take">為替 ±10円でも回収は <b>±0.2年</b> しか動かない＝<b>為替に頑健</b>。円安ほど（JPY投資が軽く）有利。</div>
+  <div class="meta"><span>感度①：為替</span><span>❌ CDがIDR経由なら二段感度を追加</span></div>
+  <div class="pageno">9</div>
 </div>
 
-<!-- ============ 未確定事項 ============ -->
+<!-- ===== 10. CD達成率感度 ===== -->
+<div class="slide">
+  <span class="tag"></span>
+  <div class="kicker">感度分析②</div>
+  <h2>CD達成率 × 遅延（→ 回収年数）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+      <line class="ax" x1="140" y1="60" x2="140" y2="420"/>
+      <line class="ax" x1="140" y1="420" x2="900" y2="420"/>
+      <g font-size="18" fill="#5b6b7f">
+        <text x="130" y="426" text-anchor="end">0</text>
+        <text x="130" y="335" text-anchor="end">1</text>
+        <text x="130" y="250" text-anchor="end">2</text>
+        <text x="130" y="165" text-anchor="end">3</text>
+        <text x="130" y="80" text-anchor="end">4</text>
+      </g>
+      <line x1="140" y1="335" x2="900" y2="335" class="gridln"/>
+      <line x1="140" y1="250" x2="900" y2="250" class="gridln"/>
+      <line x1="140" y1="165" x2="900" y2="165" class="gridln"/>
+      <line x1="140" y1="80"  x2="900" y2="80"  class="gridln"/>
+      <!-- 1年=85px ; 強気2.6→h221, 基準2.9→h247, 弱気3.8→h323 -->
+      <rect x="230" y="199" width="140" height="221" rx="4" fill="#1d7a46"/>
+      <text x="300" y="188" text-anchor="middle" class="barval" fill="#0f3d5e">2.6年</text>
+      <text x="300" y="448" text-anchor="middle" font-size="19" fill="#1a2330">強気 110%</text>
+      <rect x="450" y="173" width="140" height="247" rx="4" fill="#0a7d8c"/>
+      <text x="520" y="162" text-anchor="middle" class="barval" fill="#0f3d5e">2.9年</text>
+      <text x="520" y="448" text-anchor="middle" font-size="19" font-weight="700" fill="#0f3d5e">基準 100%</text>
+      <rect x="670" y="97"  width="140" height="323" rx="4" fill="#b4541a"/>
+      <text x="740" y="86" text-anchor="middle" class="barval" fill="#0f3d5e">3.8年</text>
+      <text x="740" y="448" text-anchor="middle" font-size="19" fill="#1a2330">弱気 80%+遅延</text>
+    </svg>
+  </div>
+  <div class="take">為替より <b>CD達成率・立上げ遅延の方が回収を大きく左右</b>（弱気で3.8年）。<b>立上げ管理が最重要レバー</b>。</div>
+  <div class="meta"><span>感度②：CD達成率×遅延</span><span>弱気＝達成80%＋6ヶ月遅延</span></div>
+  <div class="pageno">10</div>
+</div>
+
+<!-- ===== 11. リスクマップ ===== -->
+<div class="slide">
+  <span class="tag"></span>
+  <div class="kicker">リスク</div>
+  <h2>リスクマップ（影響度 × 発生確率）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 540" preserveAspectRatio="xMidYMid meet">
+      <!-- 危険ゾーン右上 -->
+      <rect x="505" y="60" width="415" height="215" fill="#fbeceb" opacity="0.8"/>
+      <text x="900" y="84" text-anchor="end" font-size="18" font-weight="700" fill="#c0392b">重点監視ゾーン</text>
+      <line class="ax" x1="120" y1="60" x2="120" y2="470"/>
+      <line class="ax" x1="120" y1="470" x2="920" y2="470"/>
+      <text x="520" y="515" text-anchor="middle" class="axlabel">発生確率（低 → 高）</text>
+      <text x="46" y="265" class="axlabel" transform="rotate(-90 46 265)">影響度（低 → 高）</text>
+      <!-- 目盛 x: 低120,中510,高900 ; y: 低470,中275,高70(プロット内) -->
+      <!-- バブル: red=重大度高(R1,R2,R5,R8) amber=他 -->
+      <g font-size="17" font-weight="700" fill="#fff">
+        <!-- R1 影響高 確率低 -->
+        <circle cx="150" cy="90" r="24" fill="#c0392b"/><text x="150" y="96" text-anchor="middle">R1</text>
+        <!-- R6 影響高 確率低 (offset下) -->
+        <circle cx="120" cy="150" r="20" fill="#e0a106"/><text x="120" y="156" text-anchor="middle">R6</text>
+        <!-- R5 影響高 確率中 -->
+        <circle cx="510" cy="95" r="24" fill="#c0392b"/><text x="510" y="101" text-anchor="middle">R5</text>
+        <!-- R8 影響中 確率高 -->
+        <circle cx="880" cy="275" r="24" fill="#c0392b"/><text x="880" y="281" text-anchor="middle">R8</text>
+        <!-- R2 影響中 確率中 -->
+        <circle cx="480" cy="250" r="24" fill="#c0392b"/><text x="480" y="256" text-anchor="middle">R2</text>
+        <!-- R3 中中 -->
+        <circle cx="545" cy="292" r="19" fill="#e0a106"/><text x="545" y="298" text-anchor="middle">R3</text>
+        <!-- R4 中中 -->
+        <circle cx="475" cy="312" r="19" fill="#e0a106"/><text x="475" y="318" text-anchor="middle">R4</text>
+        <!-- R7 中 低 -->
+        <circle cx="150" cy="300" r="19" fill="#e0a106"/><text x="150" y="306" text-anchor="middle">R7</text>
+      </g>
+      <!-- 凡例 -->
+      <circle cx="150" cy="505" r="11" fill="#c0392b"/><text x="170" y="511" font-size="16" fill="#5b6b7f">重大度 高</text>
+      <circle cx="320" cy="505" r="11" fill="#e0a106"/><text x="340" y="511" font-size="16" fill="#5b6b7f">重大度 中</text>
+      <text x="560" y="511" font-size="15" fill="#5b6b7f">R1基盤停止／R2連携遅延／R5人材／R8内訳未確定 = 重点</text>
+    </svg>
+  </div>
+  <div class="take">重点監視は <b>R1(基盤停止)・R2(連携遅延)・R5(人材)・R8(内訳未確定)</b>。R8は次アクションで即解消すべき。</div>
+  <div class="meta"><span>リスクマップ</span><span>R1–R8 ／ 四半期で再評価</span></div>
+  <div class="pageno">11</div>
+</div>
+
+<!-- ===== 12. 更新運用サイクル ===== -->
+<div class="slide">
+  <span class="tag"></span>
+  <div class="kicker">運用</div>
+  <h2>生きた台帳の更新サイクル</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <marker id="arr2" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#5b6b7f"/></marker>
+      </defs>
+      <!-- ステータス遷移チェーン -->
+      <text x="500" y="55" text-anchor="middle" font-size="20" font-weight="700" fill="#0f3d5e">発注ステータス遷移</text>
+      <g font-size="18" font-weight="700">
+        <!-- 7ノード -->
+        <g>
+          <rect x="40"  y="80" width="115" height="48" rx="6" fill="#eef4f8" stroke="#0a7d8c"/><text x="97"  y="110" text-anchor="middle" fill="#0f3d5e">見積</text>
+          <rect x="183" y="80" width="115" height="48" rx="6" fill="#eef4f8" stroke="#0a7d8c"/><text x="240" y="110" text-anchor="middle" fill="#0f3d5e">稟議</text>
+          <rect x="326" y="80" width="115" height="48" rx="6" fill="#eef4f8" stroke="#0a7d8c"/><text x="383" y="110" text-anchor="middle" fill="#0f3d5e">発注</text>
+          <rect x="469" y="80" width="115" height="48" rx="6" fill="#eef4f8" stroke="#0a7d8c"/><text x="526" y="110" text-anchor="middle" fill="#0f3d5e">入荷</text>
+          <rect x="612" y="80" width="115" height="48" rx="6" fill="#eef4f8" stroke="#0a7d8c"/><text x="669" y="110" text-anchor="middle" fill="#0f3d5e">検収</text>
+          <rect x="755" y="80" width="115" height="48" rx="6" fill="#0f3d5e"/><text x="812" y="110" text-anchor="middle" fill="#fff">稼働</text>
+          <rect x="883" y="142" width="100" height="44" rx="6" fill="#eef7f1" stroke="#1d7a46"/><text x="933" y="170" text-anchor="middle" font-size="15" fill="#0f3d5e">効果計上</text>
+        </g>
+        <g stroke="#5b6b7f" stroke-width="2">
+          <line x1="155" y1="104" x2="178" y2="104" marker-end="url(#arr2)"/>
+          <line x1="298" y1="104" x2="321" y2="104" marker-end="url(#arr2)"/>
+          <line x1="441" y1="104" x2="464" y2="104" marker-end="url(#arr2)"/>
+          <line x1="584" y1="104" x2="607" y2="104" marker-end="url(#arr2)"/>
+          <line x1="727" y1="104" x2="750" y2="104" marker-end="url(#arr2)"/>
+          <line x1="850" y1="128" x2="900" y2="142" marker-end="url(#arr2)"/>
+        </g>
+      </g>
+      <!-- レビュー・サイクル(PDCA) 円環 -->
+      <text x="500" y="250" text-anchor="middle" font-size="20" font-weight="700" fill="#0f3d5e">レビュー・サイクル</text>
+      <g font-size="18">
+        <rect x="120" y="290" width="180" height="60" rx="8" fill="#eef4f8" stroke="#0a7d8c"/>
+        <text x="210" y="318" text-anchor="middle" font-weight="700" fill="#0f3d5e">発注の都度</text>
+        <text x="210" y="340" text-anchor="middle" font-size="15" fill="#5b6b7f">B表に1行追加</text>
+        <rect x="350" y="290" width="180" height="60" rx="8" fill="#eef4f8" stroke="#0a7d8c"/>
+        <text x="440" y="318" text-anchor="middle" font-weight="700" fill="#0f3d5e">月次</text>
+        <text x="440" y="340" text-anchor="middle" font-size="15" fill="#5b6b7f">実績CD計上</text>
+        <rect x="580" y="290" width="180" height="60" rx="8" fill="#eef4f8" stroke="#0a7d8c"/>
+        <text x="670" y="318" text-anchor="middle" font-weight="700" fill="#0f3d5e">四半期</text>
+        <text x="670" y="340" text-anchor="middle" font-size="15" fill="#5b6b7f">回収再計算・優先見直し</text>
+        <rect x="810" y="290" width="180" height="60" rx="8" fill="#eef4f8" stroke="#0a7d8c"/>
+        <text x="900" y="318" text-anchor="middle" font-weight="700" fill="#0f3d5e">年次</text>
+        <text x="900" y="340" text-anchor="middle" font-size="15" fill="#5b6b7f">FX・立上率見直し</text>
+      </g>
+      <g stroke="#5b6b7f" stroke-width="2">
+        <line x1="300" y1="320" x2="348" y2="320" marker-end="url(#arr2)"/>
+        <line x1="530" y1="320" x2="578" y2="320" marker-end="url(#arr2)"/>
+        <line x1="760" y1="320" x2="808" y2="320" marker-end="url(#arr2)"/>
+      </g>
+      <!-- 戻り矢印 -->
+      <path d="M900 350 Q900 410 500 410 Q210 410 210 352" fill="none" stroke="#0a7d8c" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arr2)"/>
+      <text x="500" y="432" text-anchor="middle" font-size="16" fill="#0a7d8c">更新 → 単一情報源（トータルROI台帳）へ反映してループ</text>
+    </svg>
+  </div>
+  <div class="take">発注の都度に1行追加 → 月次/四半期/年次で再計算。<b>SSOTはトータルROI台帳</b>、本ノートは要約ハブ。</div>
+  <div class="meta"><span>更新運用サイクル</span><span>SSOT = トータルROI台帳</span></div>
+  <div class="pageno">12</div>
+</div>
+
+<!-- ===== 13. 答申への展開（ハブ） ===== -->
+<div class="slide">
+  <span class="tag"></span>
+  <div class="kicker">答申・再利用</div>
+  <h2>ハブから切り出す（重複管理しない）</h2>
+  <div class="figwrap">
+    <svg viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <marker id="arr3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+          <path d="M0,0 L8,3 L0,6 Z" fill="#0a7d8c"/></marker>
+      </defs>
+      <!-- 中心ハブ -->
+      <circle cx="500" cy="240" r="110" fill="#0f3d5e"/>
+      <text x="500" y="228" text-anchor="middle" font-size="24" font-weight="700" fill="#fff">マスターROI</text>
+      <text x="500" y="258" text-anchor="middle" font-size="24" font-weight="700" fill="#fff">ストーリーノート</text>
+      <text x="500" y="288" text-anchor="middle" font-size="15" fill="#cfe0ea">＋ トータルROI台帳(SSOT)</text>
+      <!-- スポーク4方向 -->
+      <g font-size="19" font-weight="700">
+        <rect x="60"  y="60"  width="250" height="70" rx="8" fill="#eef4f8" stroke="#0a7d8c" stroke-width="2"/>
+        <text x="185" y="92"  text-anchor="middle" fill="#0f3d5e">経営層 1枚サマリ</text>
+        <text x="185" y="115" text-anchor="middle" font-size="14" fill="#5b6b7f">表紙＋結論＋感度</text>
+        <rect x="690" y="60"  width="250" height="70" rx="8" fill="#eef4f8" stroke="#0a7d8c" stroke-width="2"/>
+        <text x="815" y="92"  text-anchor="middle" fill="#0f3d5e">個別発注 稟議</text>
+        <text x="815" y="115" text-anchor="middle" font-size="14" fill="#5b6b7f">該当行＋依存＋回収</text>
+        <rect x="60"  y="350" width="250" height="70" rx="8" fill="#eef4f8" stroke="#0a7d8c" stroke-width="2"/>
+        <text x="185" y="382" text-anchor="middle" fill="#0f3d5e">現場説明</text>
+        <text x="185" y="405" text-anchor="middle" font-size="14" fill="#5b6b7f">LT・工数・教育</text>
+        <rect x="690" y="350" width="250" height="70" rx="8" fill="#fbf6ee" stroke="#8a6d3b" stroke-width="2"/>
+        <text x="815" y="382" text-anchor="middle" fill="#8a6d3b">既存ノート接続</text>
+        <text x="815" y="405" text-anchor="middle" font-size="14" fill="#8a6d3b">Logikal答申/ROI 等</text>
+      </g>
+      <g stroke="#0a7d8c" stroke-width="2.5">
+        <line x1="405" y1="175" x2="312" y2="120" marker-end="url(#arr3)"/>
+        <line x1="595" y1="175" x2="688" y2="120" marker-end="url(#arr3)"/>
+        <line x1="405" y1="305" x2="312" y2="358" marker-end="url(#arr3)"/>
+        <line x1="595" y1="305" x2="688" y2="358" marker-end="url(#arr3)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="take">経営答申・稟議・現場説明は <b>本ノートから切り出して</b>作成。数値の真実は台帳に一元化し各資料が参照。</div>
+  <div class="meta"><span>答申・再利用</span><span>切り出し元 = 本ノート</span></div>
+  <div class="pageno">13</div>
+</div>
+
+<!-- ===== 14. 付録：未確定事項＆履歴（テキスト） ===== -->
 <div class="slide">
   <span class="tag"></span>
   <div class="kicker">Appendix</div>
-  <h2>未確定事項（TBD集約）</h2>
-  <table>
-    <thead><tr><th>#</th><th>未確定項目</th><th>影響セクション</th><th>必要な確定先</th><th>期限(目安)</th></tr></thead>
-    <tbody>
-      <tr><td>U1</td><td>投資のテーマ別内訳（123Mの配分）</td><td>B / D / E</td><td>現地・調達</td><td>2026-07</td></tr>
-      <tr><td>U2</td><td>Logikal以外のCD内訳（②⑥⑦等）</td><td>B / D</td><td>cost・現地</td><td>2026-07</td></tr>
-      <tr><td>U3</td><td>既存3ノートの実体（未存在）</td><td>H</td><td>資料オーナー</td><td>2026-07</td></tr>
-      <tr><td>U4</td><td>建屋4案の capex/工期/容量/耐震</td><td>別票</td><td>設備・経営</td><td>2026-Q3</td></tr>
-      <tr><td>U5</td><td>CD効果の通貨実体（USD直/IDR経由）</td><td>D（感度）</td><td>経理</td><td>2026-Q3</td></tr>
-      <tr><td>U6</td><td>現状タクト・人員・物量・不良率</td><td>A / B</td><td>製造・生技</td><td>2026-Q3</td></tr>
-      <tr><td>U7</td><td>立上率（ランプアップ）の実値</td><td>D</td><td>生技</td><td>稼働後</td></tr>
-    </tbody>
-  </table>
-  <div class="meta"><span>Appendix: 未確定事項</span><span>確定し次第 TBD を置換</span></div>
-</div>
-
-<!-- ============ 作業履歴 ============ -->
-<div class="slide">
-  <span class="tag"></span>
-  <div class="kicker">Appendix</div>
-  <h2>作業履歴</h2>
-  <table>
-    <thead><tr><th>日付</th><th>版</th><th>更新者</th><th>変更内容</th></tr></thead>
-    <tbody>
-      <tr><td>2026-06-29</td><td>v0.1</td><td>生産技術（主任）</td><td>骨子テンプレート新規作成（A〜H＋未確定＋履歴）。数値は確定総額のみ、他はTBD。</td></tr>
-      <tr><td class="tbd">TBD</td><td class="tbd">TBD</td><td class="tbd">TBD</td><td class="tbd">（次回更新を記入）</td></tr>
-    </tbody>
-  </table>
-  <p class="sub" style="margin-top:4mm;">関連：[[新工場投資ポートフォリオ_トータルROI設計]]（5エージェント統合版）／[[トータルROI台帳]]（SSOT・発注明細）</p>
-  <div class="meta"><span>Appendix: 作業履歴</span><span>updated 2026-06-29</span></div>
+  <h2>未確定事項（TBD）と作業履歴</h2>
+  <div style="display:flex;gap:10mm;flex:1;min-height:0;">
+    <div style="flex:1.4;">
+      <h3 style="color:#0a7d8c;font-size:13pt;margin:2mm 0;">埋めるべきTBD（収集計画）</h3>
+      <ul class="appendix">
+        <li><b>U1</b> 投資のテーマ別内訳（123Mの実配分） — 現地/調達・2026-07</li>
+        <li><b>U2</b> Logikal以外のCD内訳（②⑥⑦等） — cost/現地・2026-07</li>
+        <li><b>U3</b> 既存3ノートの実体（未入手） — 資料オーナー・2026-07</li>
+        <li><b>U4</b> 建屋4案 capex/工期/容量/耐震 — 設備/経営・2026-Q3</li>
+        <li><b>U5</b> CD効果の通貨実体（USD直/IDR経由） — 経理・2026-Q3</li>
+        <li><b>U6</b> 現状タクト・人員・物量・不良率 — 製造/生技・2026-Q3</li>
+        <li><b>U7</b> 立上率（ランプアップ）の実値 — 生技・稼働後</li>
+      </ul>
+    </div>
+    <div style="flex:1;border-left:1px solid #c9d3df;padding-left:8mm;">
+      <h3 style="color:#0a7d8c;font-size:13pt;margin:2mm 0;">作業履歴</h3>
+      <ul class="appendix">
+        <li><b>v0.1</b> 2026-06-29 骨子テンプレ作成（A〜H＋付録）</li>
+        <li><b>v0.2</b> 2026-06-29 「1スライド=1図/グラフ」に全面再構成。仮説配分を確定総額(123M/310K)へ整合補正。全グラフをインラインSVG化。</li>
+        <li class="appendix" style="color:#b00020;list-style:none;margin-top:3mm;">※ 図中の🟡内訳・回収カーブはすべて仮説。U1〜U7確定後に更新。</li>
+      </ul>
+      <p style="font-size:10pt;color:#5b6b7f;margin-top:4mm;">関連：新工場投資ポートフォリオ_トータルROI設計.md ／ トータルROI台帳.md</p>
+    </div>
+  </div>
+  <div class="take">図の数値が固まる鍵は <b>U1・U2（内訳）と U5（通貨）</b>。これらの確定後に最終PDFを書き出す。</div>
+  <div class="meta"><span>Appendix</span><span>updated 2026-06-29 v0.2</span></div>
+  <div class="pageno">14</div>
 </div>
 
 </body>
